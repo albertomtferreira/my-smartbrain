@@ -25,7 +25,6 @@ class Register extends React.Component {
   }
 
   onSubmitSignIn = () => {
-    // event.preventDefault()
     fetch('http://localhost:3001/register',{
       method:'post',
       headers: {'Content-Type':'appplication/json',},
@@ -84,7 +83,6 @@ class Register extends React.Component {
               onChange={this.onPasswordChange}
               />
             </div>
-            {/* <label className="pa0 ma0 lh-copy f6 pointer"><input type="checkbox"/> Remember me</label> */}
           </fieldset>
           <div className="">
             <input 
