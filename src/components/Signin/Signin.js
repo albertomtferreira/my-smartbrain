@@ -1,8 +1,8 @@
-import React from "react";
+import { Component } from "react";
 import './Signin.css';
 
 
-class Signin extends React.Component{
+class Signin extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -20,9 +20,10 @@ class Signin extends React.Component{
   }
 
   onSubmitSignIn = () => {
+    // event.preventDefault()
     fetch('http://localhost:3001/signin',{
       method:'post',
-      headers: {'Content-Type':'appplication/json'},
+      headers: {'Content-Type':'appplication/json',},
       body: JSON.stringify({
         email: this.state.signInEmail,
         password: this.state.signInPassword

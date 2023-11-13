@@ -8,6 +8,7 @@ import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import './App.css';
+
 class App extends Component {
   constructor() {
     super();
@@ -17,8 +18,27 @@ class App extends Component {
       imageUrl:'',
       box:{},
       route: 'signin',
-      isSignedIn: false
+      isSignedIn: false,
+      user:{
+        id:'',
+        name:'',
+        email:'',
+        entries: 0,
+        joined: 'new Date()'
+      }
     }
+  }
+
+  loadUser = (data)=>{
+    this.setState({
+      user:{
+        id:data.id,
+        name:data.name,
+        email:data.email,
+        entries: data.entries,
+        joined: data.joined
+    }}
+    )
   }
 
   calculcateFaceLocation = (data) => {
@@ -85,7 +105,22 @@ class App extends Component {
     // END OF CLARIFAI
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
     .then(response => response.json())
-    .then(result => this.displayFaceBox(this.calculcateFaceLocation(result))) 
+    .then(result => {
+      if (result){
+        fetch('http://localhost:3000/image',{
+          method: 'put',
+          headers:{'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: this.state.user.id
+          })
+        })
+        .then(result => result.json())
+        .then(count =>{
+          this.setState(Object.assign(this.state.user, {entries: count}))
+        })
+      }
+      this.displayFaceBox(this.calculcateFaceLocation(result))
+    }) 
     .catch(error => console.log('error', error));
     
   }
@@ -118,7 +153,7 @@ class App extends Component {
           :(
             route === 'signin'
             ?<Signin onRouteChange={this.onRouteChange}/>
-            :<Register onRouteChange={this.onRouteChange}/>
+            :<Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
           )
       }
     </div>
