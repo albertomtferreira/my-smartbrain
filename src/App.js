@@ -24,7 +24,7 @@ class App extends Component {
         name:'',
         email:'',
         entries: 0,
-        joined: 'new Date()'
+        joined: ''
       }
     }
   }
@@ -35,10 +35,9 @@ class App extends Component {
         id:data.id,
         name:data.name,
         email:data.email,
-        entries: data.entries,
-        joined: data.joined
-    }}
-    )
+        entries:data.entries,
+        joined:data.joined
+    }})
   }
 
   calculcateFaceLocation = (data) => {
@@ -107,7 +106,7 @@ class App extends Component {
     .then(response => response.json())
     .then(result => {
       if (result){
-        fetch('http://localhost:3000/image',{
+        fetch('http://localhost:3001/image',{
           method: 'put',
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify({
