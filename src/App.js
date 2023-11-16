@@ -78,7 +78,7 @@ class App extends Component {
   
   onButtonSubmit = ()=>{
     this.setState({imageUrl: this.state.input});
-    fetch('https://polar-waters-12887-ab12e492d460.herokuapp.com/imageurl',{
+    fetch('https://mysmartbrain-api.onrender.com/imageurl',{
           method: 'post',
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify({
@@ -88,7 +88,7 @@ class App extends Component {
     .then(response => response.json())
     .then(result => {
       if (result){
-        fetch('https://polar-waters-12887-ab12e492d460.herokuapp.com/image',{
+        fetch('https://mysmartbrain-api.onrender.com/image',{
           method: 'put',
           headers:{'Content-Type': 'application/json'},
           body: JSON.stringify({
