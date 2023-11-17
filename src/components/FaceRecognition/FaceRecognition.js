@@ -1,8 +1,9 @@
 import React from "react";
 import './FaceRecognition.css';
 
-const FaceRecognition = ({imageUrl, box}) =>{
-  return[
+const FaceRecognition = ({imageUrl, box, signinImageShow}) =>{
+  if(signinImageShow===true){
+    return[
     <div className="center ma">
       <div className="absolute mt2">
         <img id='inputimage' src={imageUrl} alt="Your Choice" width={'500px'} height={'auto'}/>;
@@ -17,7 +18,7 @@ const FaceRecognition = ({imageUrl, box}) =>{
         </div>
       </div>
     </div> 
-  ]
+  ]}
 }
 
 export default FaceRecognition;

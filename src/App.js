@@ -15,6 +15,7 @@ const initialState={
   box:{},
   route: 'signin',
   isSignedIn: false,
+  signinImageShow: false, 
   user:{
     id:'',
     name:'',
@@ -33,7 +34,8 @@ class App extends Component {
       imageUrl:'',
       box:{},
       route: 'signin',
-      isSignedIn: false,
+      isSignedIn: false, 
+      signinImageShow: false,
       user:{
         id:'',
         name:'',
@@ -77,6 +79,7 @@ class App extends Component {
   }
   
   onButtonSubmit = ()=>{
+    this.setState({signinImageShow: true})
     this.setState({imageUrl: this.state.input});
     fetch('https://mysmartbrain-api.onrender.com/imageurl',{
           method: 'post',
@@ -97,13 +100,18 @@ class App extends Component {
         })
         .then(result => result.json())
         .then(count =>{
-          this.setState(Object.assign(this.state.user, {entries: count}))
+          this.setState(Object.assign(this.state.user, {entries: count})) 
         })
-        .catch(console.log);
+        .catch(error => console.log('error image url: ', error));
       }
       this.displayFaceBox(this.calculcateFaceLocation(result))
+      
     }) 
-    .catch(error => console.log('error', error));
+    .catch(error => {
+      console.log('error: ', error);
+      alert('Please ensure that your link contains a image destination like JPG/JPEG/PNG');
+      //  this.setState({signinImageShow: true});
+    });
     
   }
 
@@ -115,9 +123,11 @@ class App extends Component {
     }
     this.setState({route: route});
   }
+
+  
     
   render(){
-    const {isSignedIn, imageUrl, route, box} = this.state;
+    const {isSignedIn, imageUrl, route, box,signinImageShow} = this.state;
   return [
     <div className='App'>
       <ParticlesEffect/>  
@@ -133,7 +143,7 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
             />
-            <FaceRecognition box={box} imageUrl={imageUrl}/>
+            <FaceRecognition box={box} imageUrl={imageUrl} signinImageShow={signinImageShow}/>
           </div>
           :(
             route === 'signin'
