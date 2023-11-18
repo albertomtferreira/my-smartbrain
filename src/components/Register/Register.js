@@ -70,7 +70,9 @@ class Register extends React.Component {
               type="email" 
               name="email-address"  
               id="email-address"
-              placeholder="Type your email address"
+              placeholder="email"
+              title="Type your email address"
+              pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required
               onChange={this.onEmailChange}
               />
             </div>
