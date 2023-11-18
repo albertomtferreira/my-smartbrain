@@ -1,7 +1,6 @@
 import React from "react";
 import './Register.css';
 
-
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -68,8 +67,8 @@ class Register extends React.Component {
               <input 
               className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
               type="email" 
-              name="email-address"  
-              id="email-address"
+              name="email"  
+              id="email"
               placeholder="email"
               title="Type your email address"
               pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required

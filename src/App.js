@@ -23,8 +23,6 @@ const initialState={
     entries: 0,
     joined: ''}
 }
-
-
 class App extends Component {
   constructor() {
     super();
@@ -123,9 +121,7 @@ class App extends Component {
     }
     this.setState({route: route});
   }
-
-  
-    
+      
   render(){
     const {isSignedIn, imageUrl, route, box,signinImageShow} = this.state;
   return [
